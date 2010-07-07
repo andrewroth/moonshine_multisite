@@ -12,9 +12,12 @@ def root_config
   if file_found
     @root_config = {'database' => nil}.merge(YAML::load(File.open(file_found)))
   else
-    throw %|
-Aborting. Need a config/database_root.yml file with contents as arguments for
-ActiveRecord::Base.establish_connection.
+    puts %|
+Warning: no config/database_root.yml found.  Using a default file with root
+    using no password on a localhost mysql install.
+
+If this doesn't work, you will need to make your own config/database_root.yml 
+file with contents as arguments for ActiveRecord::Base.establish_connection.
 
 --- 
 :host: localhost
@@ -23,6 +26,8 @@ ActiveRecord::Base.establish_connection.
 :password: password
 
 The user given must have access to create and destroy databases.|
+    @root_config = { :host => "localhost", :adapter => "mysql",
+      :username => "root", :password => "" }
   end
 end
 
