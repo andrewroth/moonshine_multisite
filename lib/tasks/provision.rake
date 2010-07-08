@@ -259,7 +259,7 @@ def provision(server, server_config, utopian, apps_filter = nil)
   first_app = true
   for app, repo in multisite_config_hash[:apps]
     next if apps_filter && !apps_filter.include?(app)
-    debug "============================= #{app.to_s.ljust(20, " ")} ============================="
+    debug "============================= #{server.to_s.ljust(10, " ")} #{app.to_s.ljust(10, " ")} ============================="
     next if repo.nil? || repo == ''
     app_root = "#{tmp_dir}/#{app}"
 
@@ -267,15 +267,16 @@ def provision(server, server_config, utopian, apps_filter = nil)
     multisite_config_hash[:stages].each do |stage|
       cap_stage = "#{server}/#{stage}"
       utopian_name = utopian_db_name(server, app, stage)
-      debug "----------------------------- #{app.to_s.ljust(10, " ")} #{stage.to_s.ljust(10, " ")} ----------------------------"
-
-      # update and make sure this app is supposed to go on this server
-      if repo == '' || %x[git ls-remote #{repo} #{server}.#{stage}] == ''
-        debug "[WRN] Skipping installation of #{app} on #{server} since no #{server}.#{stage} branch found"
-        next
-      end
+      debug "----------------------------- #{server.to_s.ljust(6, " ")} #{app.to_s.ljust(6, " ")} #{stage.to_s.ljust(7, " ")} ----------------------------"
 
       new_cap server, app, stage, utopian
+
+      # update and make sure this app is supposed to go on this server
+      branch = @cap_config.fetch(:branch, false)
+      if repo == '' || %x[git ls-remote #{repo} #{branch}] == ''
+        debug "[WRN] Skipping installation of #{app} on #{server} since no #{branch} branch found"
+        next
+      end
 
       if @cap_config.fetch(:skip_deploy, false)
         debug "[WRN] Skipping installation of #{app} on #{server} since skip_deploy flag is set"
