@@ -167,18 +167,20 @@
     :stage_moonshines:
       :pulse:
         :prod: 
-          :skip_deply: true
+          :skip_deploy: true
           :skip_pull: true
         :dev: 
           :db_name: emu_dev
           :server_name: pulse.dev.campusforchrist.org
           :server_aliases:
             - moose.campusforchrist.org
+          :branch: c4c.dev
         :staging: 
           :db_name: emu_stage
           :server_name: pulse.staging.campusforchrist.org
           :server_aliases:
             - emu.campusforchrist.org
+          :branch: c4c.staging
       :intranet:
         :prod:
           :skip_deploy: true
@@ -193,6 +195,13 @@
         :dev:
           :delayed_job: false
           :server_name: common.campusforchrist.org
+          :skip_pull: true
+          :branch: c4c.dev
+        :prod:
+          :skip_deploy: true
+          :skip_pull: true
+        :staging:
+          :skip_deploy: true
           :skip_pull: true
     :local:
       :moonshine:
@@ -371,11 +380,13 @@
         :dev: 
           :db_name: spt_dev
           :server_name: pat.dev.powertochange.org
+          :branch: p2c.dev
         :staging: 
           :db_name: spt_dev
           :server_name: pat.staging.powertochange.org
           :skip_deploy: true # there's no staging site for the pat yet
           :skip_pull: true
+          :branch: p2c.staging
       :mpdtool:
         :prod: 
           :skip_deploy: true
@@ -383,6 +394,7 @@
         :dev: 
           :db_name: mpdtool_dev
           :server_name: mpdtool.dev.powertochange.org
+          :branch: p2c.dev
         :staging: 
           :db_name: mpdtool_dev
           :server_name: mpdtool.staging.powertochange.org

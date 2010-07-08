@@ -78,6 +78,24 @@ Provisioning your local computer is complete.
         ENV['skipsetup'] = 'true'
         provision(:p2c, multisite_config_hash[:servers][:p2c], false)
       end
+      task :canada2 do
+        undefine
+        STDOUT.print "Enter the password for deploy@localhost: "
+        @local_password = STDIN.gets.chomp
+        STDOUT.print "Enter the password for deploy@pat.powertochange.org: "
+        @p2c_password = STDIN.gets.chomp
+        # download private
+        @password = @p2c_password
+        new_cap "p2c", nil, nil, true
+        run_cap nil, "moonshine:secure:download_private"
+        # now provision
+        @password = @local_password
+        @cap_config = nil # force new password to take effect
+        ENV['HOSTS'] = '127.0.0.1'
+        provision(:c4c2, multisite_config_hash[:servers][:c4c2], false)
+        ENV['skipsetup'] = 'true'
+        provision(:p2c2, multisite_config_hash[:servers][:p2c2], false)
+      end
     end
     namespace :server do
       desc "provision this computer as a Ministry Hacks server"
@@ -259,7 +277,7 @@ def provision(server, server_config, utopian, apps_filter = nil)
   first_app = true
   for app, repo in multisite_config_hash[:apps]
     next if apps_filter && !apps_filter.include?(app)
-    debug "============================= #{app.to_s.ljust(20, " ")} ============================="
+    debug "============================= #{server.to_s.ljust(10, " ")} #{app.to_s.ljust(10, " ")} ============================="
     next if repo.nil? || repo == ''
     app_root = "#{tmp_dir}/#{app}"
 
@@ -267,15 +285,16 @@ def provision(server, server_config, utopian, apps_filter = nil)
     multisite_config_hash[:stages].each do |stage|
       cap_stage = "#{server}/#{stage}"
       utopian_name = utopian_db_name(server, app, stage)
-      debug "----------------------------- #{app.to_s.ljust(10, " ")} #{stage.to_s.ljust(10, " ")} ----------------------------"
-
-      # update and make sure this app is supposed to go on this server
-      if repo == '' || %x[git ls-remote #{repo} #{server}.#{stage}] == ''
-        debug "[WRN] Skipping installation of #{app} on #{server} since no #{server}.#{stage} branch found"
-        next
-      end
+      debug "----------------------------- #{server.to_s.ljust(6, " ")} #{app.to_s.ljust(6, " ")} #{stage.to_s.ljust(7, " ")} ----------------------------"
 
       new_cap server, app, stage, utopian
+
+      # update and make sure this app is supposed to go on this server
+      branch = @cap_config.fetch(:branch, false)
+      if repo == '' || %x[git ls-remote #{repo} #{branch}] == ''
+        debug "[WRN] Skipping installation of #{app} on #{server} since no #{branch} branch found"
+        next
+      end
 
       if @cap_config.fetch(:skip_deploy, false)
         debug "[WRN] Skipping installation of #{app} on #{server} since skip_deploy flag is set"
