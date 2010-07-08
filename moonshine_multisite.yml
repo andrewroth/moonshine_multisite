@@ -71,9 +71,15 @@
           :db_name: dev_campusforchrist
           :skip_deploy: true
       :common:
-        :dev:
+        :prod:
           :delayed_job: false
           :server_name: common.campusforchrist.org
+          :skip_pull: true
+        :dev:
+          :skip_deploy: true
+          :skip_pull: true
+        :staging:
+          :skip_deploy: true
           :skip_pull: true
     :local:
       :moonshine:
@@ -236,6 +242,7 @@
         :dev: 
           :db_name: spt_dev
           :server_name: pat.dev.powertochange.org
+          :skip_deploy: true
         :staging: 
           :db_name: spt_dev
           :server_name: pat.staging.powertochange.org
@@ -248,6 +255,7 @@
         :dev: 
           :db_name: mpdtool_dev
           :server_name: mpdtool.dev.powertochange.org
+          :skip_deploy: true
         :staging: 
           :db_name: mpdtool_dev
           :server_name: mpdtool.staging.powertochange.org
