@@ -136,9 +136,9 @@
     :moonshine:
       :user: deploy
       :group: www-data
-      :server: pat.powertochange.org
-      :lan_ip: 192.168.242.177
-      :domain: campusforchrist.org
+      :server: cc.ministryhacks.com
+      :lan_ip: 173.203.111.74
+      :domain: ministryhacks.com
       :time_zone: PST
       :private_path: /home/deploy/private_repo2
       :private_host: 208.87.54.217
@@ -161,7 +161,7 @@
         "app/manifests/assets/private/certs/campusforchrist.org.cert": "/etc/apache2/certs/campusforchrist.org.cert"
         "app/manifests/assets/private/certs/campusforchrist.org.key": "/etc/apache2/certs/campusforchrist.org.key"
       :ruby: ree187 
-      :common: /var/www/common.campusforchrist.org/current
+      :common: /var/www/common.ministryhacks.com/current
       :skip_deploy: false
       :bridge_to: p2c
     :stage_moonshines:
@@ -171,16 +171,16 @@
           :skip_pull: true
         :dev: 
           :db_name: emu_dev
-          :server_name: pulse.dev.campusforchrist.org
+          :server_name: pulse.dev.ministryhacks.com
           :server_aliases:
-            - moose.campusforchrist.org
+            - moose.ministryhacks.com
           :branch: c4c.dev
           :skip_pull: true
         :staging: 
           :db_name: emu_stage
-          :server_name: pulse.staging.campusforchrist.org
+          :server_name: pulse.staging.ministryhacks.com
           :server_aliases:
-            - emu.campusforchrist.org
+            - emu.ministryhacks.com
           :branch: c4c.staging
           :skip_pull: true
       :intranet:
@@ -198,7 +198,7 @@
       :common:
         :dev:
           :delayed_job: false
-          :server_name: common.campusforchrist.org
+          :server_name: common.ministryhacks.com
           :skip_pull: true
           :branch: c4c.dev
         :prod:
@@ -207,14 +207,6 @@
         :staging:
           :skip_deploy: true
           :skip_pull: true
-    :local:
-      :moonshine:
-        :domain: local
-        :ssl: false
-        :passenger:
-          :rails_env: development
-        :user: <%= %x[whoami].chomp %>
-        :group: <%= %x[whoami].chomp %>
   :p2c:
     :moonshine:
       :user: deploy
@@ -349,16 +341,16 @@
     :moonshine:
       :user: deploy
       :group: www-data
-      :server: pat.powertochange.org
-      :lan_ip: 192.168.242.175
-      :domain: powertochange.org
+      :server: cc.ministryhacks.com
+      :lan_ip: 173.203.111.74
+      :domain: ministryhacks.com
       :time_zone: PST
       :private_path: /home/deploy/private_repo2
       :private_host: 208.87.54.217
       :private_user: deploy
-      :ssl: true
+      :ssl: false
       :ruby: ree187 
-      :common: /var/www/common.campusforchrist.org/current
+      :common: /var/www/common.ministryhacks.com/current
       :shared_children:
         - config
         - log
@@ -383,11 +375,11 @@
           :skip_pull: true
         :dev: 
           :db_name: spt_dev
-          :server_name: pat.dev.powertochange.org
+          :server_name: pat.dev.ministryhacks.com
           :branch: p2c.dev
         :staging: 
           :db_name: spt_dev
-          :server_name: pat.staging.powertochange.org
+          :server_name: pat.staging.ministryhacks.com
           :skip_deploy: true # there's no staging site for the pat yet
           :skip_pull: true
           :branch: p2c.staging
@@ -397,11 +389,11 @@
           :skip_pull: true
         :dev: 
           :db_name: mpdtool_dev
-          :server_name: mpdtool.dev.powertochange.org
+          :server_name: mpdtool.dev.ministryhacks.com
           :branch: p2c.dev
         :staging: 
           :db_name: mpdtool_dev
-          :server_name: mpdtool.staging.powertochange.org
+          :server_name: mpdtool.staging.ministryhacks.com
           :skip_deploy: true # there's no staging site for the mpdtool yet
           :skip_pull: true
       :intranet:
