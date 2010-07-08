@@ -257,22 +257,28 @@
           :db_name: ciministry
           :skip_deploy: true
           :sensitive: true
+          :skip_pull: true
         :dev:
           :db_name: dev_campusforchrist
           :skip_deploy: true
+          :skip_pull: true
         :staging:
           :db_name: dev_campusforchrist
           :skip_deploy: true
+          :skip_pull: true
       :common:
         :prod: 
           :db_name: emu
           :skip_deploy: true
+          :skip_pull: true
         :dev: 
           :db_name: emu_common
           :skip_deploy: true
+          :skip_pull: true
         :staging: 
           :db_name: emu_stage
           :skip_deploy: true
+          :skip_pull: true
     :local:
       :moonshine:
         :domain: local
