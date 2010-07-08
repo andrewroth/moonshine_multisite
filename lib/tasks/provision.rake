@@ -28,8 +28,11 @@ Provisioning your local computer is complete.
 
 To download all the database info, run:
 
+      cd /var/www/common.local
       cap c4c pull:dbs:utopian sensitive=true user=deploy
       cap p2c pull:dbs:utopian sensitive=true user=deploy
+
+To develop in the utopian branch, use rake db:reset.
 
 |
     end
