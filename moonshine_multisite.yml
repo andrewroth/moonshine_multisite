@@ -175,12 +175,14 @@
           :server_aliases:
             - moose.campusforchrist.org
           :branch: c4c.dev
+          :skip_pull: true
         :staging: 
           :db_name: emu_stage
           :server_name: pulse.staging.campusforchrist.org
           :server_aliases:
             - emu.campusforchrist.org
           :branch: c4c.staging
+          :skip_pull: true
       :intranet:
         :prod:
           :skip_deploy: true
@@ -188,9 +190,11 @@
         :dev:
           :db_name: dev_campusforchrist
           :skip_deploy: true
+          :skip_pull: true
         :staging:
           :db_name: dev_campusforchrist
           :skip_deploy: true
+          :skip_pull: true
       :common:
         :dev:
           :delayed_job: false
