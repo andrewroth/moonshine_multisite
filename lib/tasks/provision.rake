@@ -78,6 +78,24 @@ Provisioning your local computer is complete.
         ENV['skipsetup'] = 'true'
         provision(:p2c, multisite_config_hash[:servers][:p2c], false)
       end
+      task :canada2 do
+        undefine
+        STDOUT.print "Enter the password for deploy@localhost: "
+        @local_password = STDIN.gets.chomp
+        STDOUT.print "Enter the password for deploy@pat.powertochange.org: "
+        @p2c_password = STDIN.gets.chomp
+        # download private
+        @password = @p2c_password
+        new_cap "p2c", nil, nil, true
+        run_cap nil, "moonshine:secure:download_private"
+        # now provision
+        @password = @local_password
+        @cap_config = nil # force new password to take effect
+        ENV['HOSTS'] = '127.0.0.1'
+        provision(:c4c2, multisite_config_hash[:servers][:c4c2], false)
+        ENV['skipsetup'] = 'true'
+        provision(:p2c2, multisite_config_hash[:servers][:p2c2], false)
+      end
     end
     namespace :server do
       desc "provision this computer as a Ministry Hacks server"
