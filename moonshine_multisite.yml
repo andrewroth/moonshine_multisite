@@ -55,12 +55,10 @@
           :delayed_job: false # don't conflict with the task already running
         :dev: 
           :db_name: emu_dev
-          :server_name: pulse.dev.campusforchrist.org
-          :server_aliases:
-            - moose.campusforchrist.org
+          :skip_deploy: true
         :staging: 
           :db_name: emu_stage
-          :server_name: pulse.staging.campusforchrist.org
+          :skip_deploy: true
       :intranet:
         :prod:
           :db_name: ciministry
@@ -128,6 +126,76 @@
           :test:
             :db_name: c4c_pulse_test
             :skip_deploy: true
+  :c4c2:
+    :moonshine:
+      :user: deploy
+      :group: www-data
+      :server: pat.powertochange.org
+      :lan_ip: 192.168.242.177
+      :domain: campusforchrist.org
+      :time_zone: PST
+      :private_path: /home/deploy/private_repo2
+      :private_host: 208.87.54.217
+      :private_user: deploy
+      :ssl: true
+      :delayed_job: true
+      :shared_children:
+        - config
+        - log
+        - tmp
+        - tmp/sessions
+        - tmp/pids
+        - public
+      :shared_config:
+        - config/database.yml
+        - log
+        - tmp
+        # TODO shared public dir for attachment_fu
+      :certs:
+        "app/manifests/assets/private/certs/campusforchrist.org.cert": "/etc/apache2/certs/campusforchrist.org.cert"
+        "app/manifests/assets/private/certs/campusforchrist.org.key": "/etc/apache2/certs/campusforchrist.org.key"
+      :ruby: ree187 
+      :common: /var/www/common.campusforchrist.org/current
+      :skip_deploy: false
+      :bridge_to: p2c
+    :stage_moonshines:
+      :pulse:
+        :prod: 
+          :skip_deply: true
+          :skip_pull: true
+        :dev: 
+          :db_name: emu_dev
+          :server_name: pulse.dev.campusforchrist.org
+          :server_aliases:
+            - moose.campusforchrist.org
+        :staging: 
+          :db_name: emu_stage
+          :server_name: pulse.staging.campusforchrist.org
+          :server_aliases:
+            - emu.campusforchrist.org
+      :intranet:
+        :prod:
+          :skip_deploy: true
+          :skip_pull: true
+        :dev:
+          :db_name: dev_campusforchrist
+          :skip_deploy: true
+        :staging:
+          :db_name: dev_campusforchrist
+          :skip_deploy: true
+      :common:
+        :dev:
+          :delayed_job: false
+          :server_name: common.campusforchrist.org
+          :skip_pull: true
+    :local:
+      :moonshine:
+        :domain: local
+        :ssl: false
+        :passenger:
+          :rails_env: development
+        :user: <%= %x[whoami].chomp %>
+        :group: <%= %x[whoami].chomp %>
   :p2c:
     :moonshine:
       :user: deploy
@@ -250,6 +318,85 @@
           :staging:
             :db_name: c4c_intranet_staging
             :skip_deploy: true
+  :p2c2:
+    :moonshine:
+      :user: deploy
+      :group: www-data
+      :server: pat.powertochange.org
+      :lan_ip: 192.168.242.175
+      :domain: powertochange.org
+      :time_zone: PST
+      :private_path: /home/deploy/private_repo2
+      :private_host: 208.87.54.217
+      :private_user: deploy
+      :ssl: true
+      :ruby: ree187 
+      :common: /var/www/common.campusforchrist.org/current
+      :shared_children:
+        - config
+        - log
+        - tmp
+        - tmp/sessions
+        - tmp/pids
+        - public
+      :shared_config:
+        - config/database.yml
+        - log
+        - tmp
+        - public/event_groups
+      :certs:
+        "app/manifests/assets/private/certs/powertochange.org.cert": "/etc/apache2/certs/powertochange.org.cert"
+        "app/manifests/assets/private/certs/powertochange.org.key": "/etc/apache2/certs/powertochange.org.key"
+      :skip_deploy: false
+      :bridge_to: c4c
+    :stage_moonshines:
+      :pat:
+        :prod: 
+          :skip_deploy: true
+          :skip_pull: true
+        :dev: 
+          :db_name: spt_dev
+          :server_name: pat.dev.powertochange.org
+        :staging: 
+          :db_name: spt_dev
+          :server_name: pat.staging.powertochange.org
+          :skip_deploy: true # there's no staging site for the pat yet
+          :skip_pull: true
+      :mpdtool:
+        :prod: 
+          :skip_deploy: true
+          :skip_pull: true
+        :dev: 
+          :db_name: mpdtool_dev
+          :server_name: mpdtool.dev.powertochange.org
+        :staging: 
+          :db_name: mpdtool_dev
+          :server_name: mpdtool.staging.powertochange.org
+          :skip_deploy: true # there's no staging site for the mpdtool yet
+          :skip_pull: true
+      :intranet:
+        :prod:
+          :skip_deploy: true
+          :skip_pull: true
+        :dev:
+          :db_name: dev_campusforchrist
+          :skip_deploy: true
+        :staging:
+          :db_name: dev_campusforchrist
+          :skip_deploy: true
+      :common:
+        :prod: 
+          :db_name: emu
+          :skip_deploy: true
+          :skip_pull: true
+        :dev: 
+          :db_name: emu_common
+          :skip_deploy: true
+          :skip_pull: true
+        :staging: 
+          :db_name: emu_stage
+          :skip_deploy: true
+          :skip_pull: true
   :mh:
     :moonshine:
       :user: deploy
