@@ -171,14 +171,14 @@
           :skip_pull: true
         :dev: 
           :db_name: emu_dev
-          :server_name: pulse.dev.ministryhacks.com
+          :server_name: pulse.dev.ca.ministryhacks.com
           :server_aliases:
             - moose.ministryhacks.com
           :branch: c4c.dev
           :skip_pull: true
         :staging: 
           :db_name: emu_stage
-          :server_name: pulse.staging.ministryhacks.com
+          :server_name: pulse.staging.ca.ministryhacks.com
           :server_aliases:
             - emu.ministryhacks.com
           :branch: c4c.staging
@@ -375,11 +375,11 @@
           :skip_pull: true
         :dev: 
           :db_name: spt_dev
-          :server_name: pat.dev.ministryhacks.com
+          :server_name: pat.dev.ca.ministryhacks.com
           :branch: p2c.dev
         :staging: 
           :db_name: spt_dev
-          :server_name: pat.staging.ministryhacks.com
+          :server_name: pat.staging.ca.ministryhacks.com
           :skip_deploy: true # there's no staging site for the pat yet
           :skip_pull: true
           :branch: p2c.staging
@@ -389,11 +389,11 @@
           :skip_pull: true
         :dev: 
           :db_name: mpdtool_dev
-          :server_name: mpdtool.dev.ministryhacks.com
+          :server_name: mpdtool.dev.ca.ministryhacks.com
           :branch: p2c.dev
         :staging: 
           :db_name: mpdtool_dev
-          :server_name: mpdtool.staging.ministryhacks.com
+          :server_name: mpdtool.staging.ca.ministryhacks.com
           :skip_deploy: true # there's no staging site for the mpdtool yet
           :skip_pull: true
       :intranet:
