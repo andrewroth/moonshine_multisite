@@ -32,7 +32,11 @@ The user given must have access to create and destroy databases.|
 end
 
 def load_dump(dump, db)
-  throw "Overwriting production database detected! db: #{db}" if %w(summerprojecttool emu ciministry).include?(db.to_s) && (ENV['sensitive'] != 'true' || %x[hostname].chomp == 'pat')
+  overwrite = %w(summerprojecttool emu ciministry).include?(db.to_s) && (ENV['sensitive'] != 'true' || %x[hostname].chomp == 'pat')
+  if overwrite
+    puts "[DBG] Overwriting production database detected! db: #{db}  Skipping.  If you want to force this, use sensitive=true"
+    return
+  end
   execute_sql "DROP DATABASE IF EXISTS #{db}; CREATE DATABASE #{db}"
   output_command = Kernel.is_windows? ? 'type' : 'cat'
   username = root_config[:username]
