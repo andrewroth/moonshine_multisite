@@ -246,35 +246,37 @@ namespace :shared_config do
   end
 end
 
-namespace :deploy do
-  desc "Restart the Passenger processes on the app server by touching tmp/restart.txt."
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
+unless moonshine_disabled
+  namespace :deploy do
+    desc "Restart the Passenger processes on the app server by touching tmp/restart.txt."
+    task :restart, :roles => :app, :except => { :no_release => true } do
+      run "touch #{current_path}/tmp/restart.txt"
+    end
 
-  [:start, :stop].each do |t|
-    desc "#{t} task is a no-op with Passenger"
-    task t, :roles => :app do ; end
-  end
+    [:start, :stop].each do |t|
+      desc "#{t} task is a no-op with Passenger"
+      task t, :roles => :app do ; end
+    end
 
-  desc <<-DESC
-    Prepares one or more servers for deployment. Before you can use any \
-    of the Capistrano deployment tasks with your project, you will need to \
-    make sure all of your servers have been prepared with `cap deploy:setup'. When \
-    you add a new server to your cluster, you can easily run the setup task \
-    on just that server by specifying the HOSTS environment variable:
- 
-      $ cap HOSTS=new.server.com deploy:setup
- 
-    It is safe to run this task on servers that have already been set up; it \
-    will not destroy any deployed revisions or data.
-  DESC
-  task :setup, :except => { :no_release => true } do
-    moonshine.bootstrap
-  end
+    desc <<-DESC
+      Prepares one or more servers for deployment. Before you can use any \
+      of the Capistrano deployment tasks with your project, you will need to \
+      make sure all of your servers have been prepared with `cap deploy:setup'. When \
+      you add a new server to your cluster, you can easily run the setup task \
+      on just that server by specifying the HOSTS environment variable:
+   
+        $ cap HOSTS=new.server.com deploy:setup
+   
+      It is safe to run this task on servers that have already been set up; it \
+      will not destroy any deployed revisions or data.
+    DESC
+    task :setup, :except => { :no_release => true } do
+      moonshine.bootstrap
+    end
 
-  # I really don't like how cap's deploy.rb creates directories, so I'm going to noop it
-  task :finalize_update do
+    # I really don't like how cap's deploy.rb creates directories, so I'm going to noop it
+    task :finalize_update do
+    end
   end
 end
 
