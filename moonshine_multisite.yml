@@ -452,6 +452,8 @@
           :db_name: spt_dev
           :server_name: pat.dev.ca.powertochange.org
           :branch: p2c.dev
+          :server_aliases:
+            - elk.powertochange.org
         :staging: 
           :db_name: spt_dev
           :server_name: pat.staging.ca.powertochange.org
@@ -466,6 +468,8 @@
           :db_name: mpdtool_dev
           :server_name: mpdtool.dev.ca.powertochange.org
           :branch: p2c.dev
+          :server_aliases:
+            - grizzly.powertochange.org
         :staging: 
           :db_name: mpdtool_dev
           :server_name: mpdtool.staging.ca.powertochange.org
