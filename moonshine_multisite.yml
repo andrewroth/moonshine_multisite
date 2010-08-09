@@ -137,7 +137,7 @@
       :user: deploy
       :group: www-data
       :server: 184.106.199.112
-      :lan_ip: 173.203.111.74
+      :lan_ip: 184.106.199.112
       :domain: ministryhacks.com
       :time_zone: PST
       :private_path: /home/deploy/private_repo2
@@ -416,8 +416,8 @@
     :moonshine:
       :user: deploy
       :group: www-data
-      :server: 184.106.199.112 # TODO: this will have to be a secondary ip
-      :lan_ip: 184.106.199.112
+      :server: 184.106.199.112
+      :lan_ip: 184.106.230.248 # secondary IP
       :domain: powertochange.org
       :time_zone: PST
       :private_path: /home/deploy/private_repo2
