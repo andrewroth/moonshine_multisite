@@ -775,6 +775,86 @@
           :test:
             :db_name: utopian_mpdtool_test
             :skip_deploy: true
+  :us:
+    :moonshine:
+      :user: deploy
+      :group: www-data
+      :server: pat.powertochange.org
+      :lan_ip: 192.168.242.177
+      :domain: campusforchrist.org
+      :time_zone: PST
+      :private_path: /home/deploy/private_repo2
+      :private_host: 208.87.54.217
+      :private_user: deploy
+      :ssl: true
+      :delayed_job: true
+      :shared_children:
+        - config
+        - log
+        - tmp
+        - tmp/sessions
+        - tmp/pids
+        - public
+      :shared_config:
+        - config/database.yml
+        - log
+        - tmp
+        # TODO shared public dir for attachment_fu
+      :certs:
+        "app/manifests/assets/private/certs/campusforchrist.org.cert": "/etc/apache2/certs/campusforchrist.org.cert"
+        "app/manifests/assets/private/certs/campusforchrist.org.key": "/etc/apache2/certs/campusforchrist.org.key"
+      :ruby: ree187 
+      :common: /var/www/common.campusforchrist.org/current
+      :skip_deploy: false
+      :bridge_to: p2c
+    :stage_moonshines:
+    :local:
+      :moonshine:
+        :domain: local
+        :ssl: false
+        :passenger:
+          :rails_env: development
+        :user: <%= %x[whoami].chomp %>
+        :group: <%= %x[whoami].chomp %>
+      :stage_moonshines:
+        :pulse:
+          :prod: 
+            :db_name: uscm
+            :skip_deploy: true
+          :dev:  # only dev is installed in /var/www, the other stages are for db only
+                 # since there is only c4c.dev (no c4c.prod or c4c.staging) in pulse git
+            :db_name: uscm
+          :staging: 
+            :skip_deploy: true
+          :test: 
+            :db_name: uscm
+            :skip_deploy: true
+        :intranet: # for db only
+          :prod:
+            :db_name: uscm
+            :skip_deploy: true
+          :dev:
+            :db_name: uscm
+            :skip_deploy: true
+          :staging:
+            :db_name: uscm
+            :skip_deploy: true
+          :test:
+            :db_name: uscm
+            :skip_deploy: true
+        :common:
+          :prod:
+            :db_name: uscm
+            :skip_deploy: true
+          :dev:
+            :db_name: uscm
+            :skip_deploy: true
+          :staging:
+            :db_name: uscm
+            :skip_deploy: true
+          :test:
+            :db_name: uscm
+            :skip_deploy: true
 :apps:
   :pat: git://github.com/andrewroth/project_application_tool.git
   :pulse: git://github.com/twinge/ministry-tracker.git
