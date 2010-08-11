@@ -138,7 +138,7 @@
       :group: www-data
       :server: 184.106.199.112
       :lan_ip: 184.106.199.112
-      :domain: ministryhacks.com
+      :domain: campusforchrist.org
       :time_zone: PST
       :private_path: /home/deploy/private_repo2
       :private_host: 208.87.54.217
@@ -171,14 +171,14 @@
           :skip_pull: true
         :dev: 
           :db_name: emu_dev
-          :server_name: pulse.dev.ca.campusforchrist.org
+          :server_name: pulse.dev.campusforchrist.org
           :server_aliases:
             - moose.ministryhacks.com
           :branch: c4c.dev
           :skip_pull: true
         :staging: 
           :db_name: emu_stage
-          :server_name: pulse.staging.ca.campusforchrist.org
+          :server_name: pulse.staging.campusforchrist.org
           :server_aliases:
             - emu.campusforchrist.org
           :branch: c4c.staging
@@ -201,6 +201,7 @@
           :server_name: common.campusforchrist.org
           :skip_pull: true
           :branch: c4c.dev
+          :ssl: false
         :prod:
           :skip_deploy: true
           :skip_pull: true
