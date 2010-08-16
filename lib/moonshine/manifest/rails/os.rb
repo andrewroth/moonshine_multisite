@@ -54,7 +54,7 @@ from installing any gems, packages, or dependencies directly on the server.
   
   # Install postfix.
   def sendmail
-    package 'postfix', :ensure => :latest
+    package 'sendmail', :ensure => :latest
   end
   
   # Install ntp and enables the ntp service.
