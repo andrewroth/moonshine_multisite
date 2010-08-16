@@ -36,7 +36,7 @@ class Moonshine::Manifest::Rails < Moonshine::Manifest
   include Moonshine::Manifest::Rails::Os
 
   # A super recipe for installing Apache, Passenger, a database, 
-  # Rails, NTP, Cron, Postfix. To customize your stack, call the
+  # Rails, NTP, Cron, Sendmail. To customize your stack, call the
   # individual recipes you want to include rather than default_stack.
   #
   # The database installed is based on the adapter in database.yml.
@@ -57,6 +57,6 @@ class Moonshine::Manifest::Rails < Moonshine::Manifest
     end
     self.class.recipe :rails_rake_environment, :rails_gems, :rails_directories, :rails_bootstrap, :rails_migrations, :rails_logrotate
     self.class.recipe :monit
-    self.class.recipe :git_gem, :ntp, :time_zone, :postfix, :cron_packages, :security_updates, :cron_app
+    self.class.recipe :git_gem, :ntp, :time_zone, :sendmail, :cron_packages, :security_updates, :cron_app
   end
 end
