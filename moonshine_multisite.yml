@@ -171,16 +171,16 @@
           :skip_pull: true
         :dev: 
           :db_name: emu_dev
-          :server_name: pulse.dev.campusforchrist.org
+          :server_name: moose.campusforchrist.org
           :server_aliases:
-            - moose.ministryhacks.com
+            - pulse.dev.campusforchrist.org
           :branch: c4c.dev
           :skip_pull: true
         :staging: 
           :db_name: emu_stage
-          :server_name: pulse.staging.campusforchrist.org
+          :server_name: emu.campusforchrist.org
           :server_aliases:
-            - emu.campusforchrist.org
+            - pulse.staging.campusforchrist.org
           :branch: c4c.staging
           :skip_pull: true
       :intranet:
