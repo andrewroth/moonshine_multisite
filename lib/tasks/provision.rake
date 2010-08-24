@@ -62,6 +62,7 @@ Provisioning your local computer is complete.
     namespace :server do
       desc "provision this computer as a Canadian server"
       task :canada do
+        undefine
         STDOUT.print "Enter the password for deploy@localhost: "
         @local_password = STDIN.gets.chomp
         STDOUT.print "Enter the password for deploy@pat.powertochange.org: "
