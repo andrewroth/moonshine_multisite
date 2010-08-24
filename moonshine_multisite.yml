@@ -161,7 +161,7 @@
         "app/manifests/assets/private/certs/campusforchrist.org.cert": "/etc/apache2/certs/campusforchrist.org.cert"
         "app/manifests/assets/private/certs/campusforchrist.org.key": "/etc/apache2/certs/campusforchrist.org.key"
       :ruby: ree187 
-      :common: /var/www/common.ministryhacks.com/current
+      :common: /var/www/common.campusforchrist.org/current
       :skip_deploy: false
       :bridge_to: p2c
     :stage_moonshines:
