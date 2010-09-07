@@ -154,6 +154,7 @@
         - public
       :shared_config:
         - config/database.yml
+        - config/initializers/eventbright.rb
         - log
         - tmp
         # TODO shared public dir for attachment_fu
