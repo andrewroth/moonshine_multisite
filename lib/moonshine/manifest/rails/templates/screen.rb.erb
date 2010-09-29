@@ -1,0 +1,37 @@
+name = <%= configuration[:application] %>
+
+# start a screen if it exists
+unless %x[screen -ls] =~ /\d+\.#{name}/
+  puts "Not found, starting."
+  system "screen -d -m -S #{name}"
+  sleep 1
+end
+
+# next kill the rake jobs:work command, but just in case there
+# is currently no jobs:work (it may have been killed manually)
+# start a command that will be killed instead of the screen itself
+system "screen -S #{name} -X exec cat"
+sleep 1
+
+# now kill the last command, which will either be the cat above
+# or the rake jobs:work command
+system "screen -S #{name} -X kill"
+sleep 5
+
+# cd to home then back to the deploy directory so ensure the screen
+# working directory is the latest release
+system "screen -S #{name} -X chdir"
+sleep 1
+system "screen -S #{name} -X chdir /var/www/<%= configuration[:application] %>.<%= configuration[:domain] %>/current"
+sleep 1
+system "screen -S #{name} -X exec echo"
+sleep 2
+system "screen -S #{name} -X exec echo ================ Restarting rake jobs:work ================"
+sleep 2
+system "screen -S #{name} -X exec echo"
+sleep 1
+system "screen -S #{name} -X setenv RAILS_ENV production"
+sleep 1
+system "screen -S #{name} -X exec rake jobs:work"
+sleep 2
+
