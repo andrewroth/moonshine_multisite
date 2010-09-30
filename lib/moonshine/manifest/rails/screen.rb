@@ -1,4 +1,4 @@
-module Moonshine::Manifest::Rails::Monit
+module Moonshine::Manifest::Rails::Screen
 
   # Installs <tt>screen utility</tt>
   # Adds a ruby script in 
