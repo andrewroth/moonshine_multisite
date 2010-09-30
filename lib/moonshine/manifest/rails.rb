@@ -31,7 +31,7 @@ class Moonshine::Manifest::Rails < Moonshine::Manifest
   require File.join(File.dirname(__FILE__), 'rails', 'rails.rb')
   include Moonshine::Manifest::Rails::Rails
   require File.join(File.dirname(__FILE__), 'rails', 'screen.rb')
-  include Moonshine::Manifest::Rails::Monit
+  include Moonshine::Manifest::Rails::Screen
   require File.join(File.dirname(__FILE__), 'rails', 'os.rb')
   include Moonshine::Manifest::Rails::Os
 

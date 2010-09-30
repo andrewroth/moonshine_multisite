@@ -16,10 +16,10 @@ module Moonshine::Manifest::Rails::Monit
         :before => exec("screen_dj_restart"),
         :require => package("screen")
     else
+      screen_dj_stop
       file "/etc/screen.d/#{configuration[:application]}.rb",
         :ensure => :absent,
-        :before => exec("screen_dj_stop"),
-        :require => package("screen_dj_stop")
+        :before => exec("screen_dj_stop")
     end
     screen_dj_restart
   end
