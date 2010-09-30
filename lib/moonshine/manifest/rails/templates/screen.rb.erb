@@ -1,4 +1,4 @@
-name = <%= configuration[:application] %>
+name = "<%= configuration[:application] %>"
 
 # start a screen if it exists
 unless %x[screen -ls] =~ /\d+\.#{name}/
