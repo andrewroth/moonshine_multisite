@@ -1,4 +1,4 @@
-name = "<%= configuration[:application] %>"
+name = "<%= configuration[:code] %>"
 
 # start a screen if it exists
 unless %x[screen -ls] =~ /\d+\.#{name}/
@@ -22,7 +22,7 @@ sleep 5
 # working directory is the latest release
 system "screen -S #{name} -X chdir"
 sleep 1
-system "screen -S #{name} -X chdir /var/www/<%= configuration[:application] %>.<%= configuration[:domain] %>/current"
+system "screen -S #{name} -X chdir /var/www/<%= configuration[:deploy_to] %>/current"
 sleep 1
 system "screen -S #{name} -X exec echo"
 sleep 2

@@ -49,14 +49,17 @@
     :stage_moonshines:
       :pulse:
         :prod: 
+          :code: pulse
           :db_name: emu
           :server_name: pulse.campusforchrist.org
           :sensitive: true
           :delayed_job: false # don't conflict with the task already running
         :dev: 
+          :code: moose
           :db_name: emu_dev
           :skip_deploy: true
         :staging: 
+          :code: emu
           :db_name: emu_stage
           :skip_deploy: true
       :intranet:
@@ -92,13 +95,16 @@
       :stage_moonshines:
         :pulse:
           :prod: 
+            :code: pulse
             :db_name: c4c_pulse_prod
             :skip_deploy: true
           :dev:  # only dev is installed in /var/www, the other stages are for db only
                  # since there is only c4c.dev (no c4c.prod or c4c.staging) in pulse git
+            :code: moose
             :db_name: c4c_pulse_dev
             :server_name: pulse.local
           :staging: 
+            :code: emu
             :db_name: c4c_pulse_staging
             :skip_deploy: true
           :test: 
@@ -168,9 +174,11 @@
     :stage_moonshines:
       :pulse:
         :prod: 
+          :code: pulse
           :skip_deploy: true
           :skip_pull: true
         :dev: 
+          :code: moose
           :db_name: emu_dev
           :server_name: moose.campusforchrist.org
           :server_aliases:
@@ -178,6 +186,7 @@
           :branch: c4c.dev
           :skip_pull: true
         :staging: 
+          :code: emu
           :db_name: emu_stage
           :server_name: emu.campusforchrist.org
           :server_aliases:
