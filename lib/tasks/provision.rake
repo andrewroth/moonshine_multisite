@@ -320,8 +320,10 @@ def provision(server, server_config, utopian, apps_filter = nil)
       end
       @cap_config.put db_file, "#{@cap_config.fetch(:shared_path)}/config/database.yml"
       # copy eventbrite configs -- this is Cdn-specific
-      eb_file = File.read("app/manifests/assets/private/database_configs/eventbright.#{utopian_name}.rb")
-      @cap_config.put eb_file, "#{@cap_config.fetch(:shared_path)}/config/initializers/eventbright.rb"
+      eb_file_path = "app/manifests/assets/private/eventbrite/eventbright.#{utopian_name}.rb"
+      if File.exists?(eb_file_path)
+        @cap_config.put(File.read(eb_file_path), "#{@cap_config.fetch(:shared_path)}/config/initializers/eventbright.rb")
+      end
       # upload certs if possible
       if @cap_config.fetch(:ssl, false) && @cap_config.fetch(:certs, nil).is_a?(Hash)
         @cap_config.fetch(:certs).each do |local_file, remote_file|

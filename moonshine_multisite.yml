@@ -29,6 +29,7 @@
       :delayed_job: true
       :shared_children:
         - config
+        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -153,6 +154,7 @@
       :delayed_job: true
       :shared_children:
         - config
+        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -233,6 +235,7 @@
       :delayed_job: true
       :shared_children:
         - config
+        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -309,6 +312,7 @@
       :common: /var/www/common.campusforchrist.org/current
       :shared_children:
         - config
+        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -439,6 +443,7 @@
       :common: /var/www/common.powertochange.org/current
       :shared_children:
         - config
+        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -525,6 +530,7 @@
       :common: /var/www/common.ministryhacks.com/current
       :shared_children:
         - config
+        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -607,6 +613,7 @@
       :common: /var/www/common.ministryhacks.com/current
       :shared_children:
         - config
+        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -800,6 +807,7 @@
       :delayed_job: true
       :shared_children:
         - config
+        - config/initializers
         - log
         - tmp
         - tmp/sessions
