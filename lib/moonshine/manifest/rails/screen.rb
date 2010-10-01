@@ -10,14 +10,22 @@ module Moonshine::Manifest::Rails::Screen
 
     file '/etc/screen.d', :ensure => :directory
     if configuration[:delayed_job]
-      file "/etc/screen.d/#{configuration[:code]}.rb",
+      file "/etc/screen.d/dj_#{configuration[:code]}.rb",
         :ensure => :present,
-        :content => template(File.join(File.dirname(__FILE__), 'templates', 'screen.rb.erb')),
+        :content => template(File.join(File.dirname(__FILE__), 'templates', 'dj_screen.rb.erb')),
+        :before => exec("screen_dj_restart"),
+        :require => package("screen")
+      file "/etc/screen.d/dj_#{configuration[:code]}.sh",
+        :ensure => :present,
+        :content => template(File.join(File.dirname(__FILE__), 'templates', 'dj_screen.sh.erb')),
         :before => exec("screen_dj_restart"),
         :require => package("screen")
     else
       screen_dj_stop
-      file "/etc/screen.d/#{configuration[:code]}.rb",
+      file "/etc/screen.d/dj_#{configuration[:code]}.rb",
+        :ensure => :absent,
+        :before => exec("screen_dj_stop")
+      file "/etc/screen.d/dj_#{configuration[:code]}.sh",
         :ensure => :absent,
         :before => exec("screen_dj_stop")
     end
@@ -26,7 +34,7 @@ module Moonshine::Manifest::Rails::Screen
 
   def screen_dj_restart
     exec "screen_dj_restart", 
-      :command => "ruby /etc/screen.d/#{configuration[:code]}.rb",
+      :command => "sudo -u #{configuration[:user]} ruby /etc/screen.d/dj_#{configuration[:code]}.rb",
       :require => package("screen")
   end
 
