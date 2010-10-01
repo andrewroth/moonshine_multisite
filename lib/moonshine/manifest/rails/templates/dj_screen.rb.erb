@@ -15,4 +15,4 @@ end
 start_with_check name
 system "screen -S #{name} -p 0 -X exec cat" # run something in case nothing is running so kill doesn't close screen
 system "screen -S #{name} -p 0 -X kill"
-system "screen -S #{name} -p 0 -X exec /etc/screen.d/emu.sh"
+system "screen -S #{name} -p 0 -X exec /etc/screen.d/dj_<%= configuration[:code] %>.sh"

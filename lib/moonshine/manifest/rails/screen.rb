@@ -19,7 +19,8 @@ module Moonshine::Manifest::Rails::Screen
         :ensure => :present,
         :content => template(File.join(File.dirname(__FILE__), 'templates', 'dj_screen.sh.erb')),
         :before => exec("screen_dj_restart"),
-        :require => package("screen")
+        :require => package("screen"),
+        :mode => "755"
     else
       screen_dj_stop
       file "/etc/screen.d/dj_#{configuration[:code]}.rb",
