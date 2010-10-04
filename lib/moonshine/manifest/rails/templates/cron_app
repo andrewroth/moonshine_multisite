@@ -1,7 +1,7 @@
 #!/bin/sh
 # this script is specific to ministry hacks
 
-<% if configuration[:server_only] == "c4c" %>
+<% if configuration[:server_only] == :c4c %>
 # clean up production
 cd /var/www/<%= configuration[:application] %>.<%= configuration[:domain] %>/current
 sudo -u <%= configuration[:user] %> rake db:sessions:clear
@@ -16,7 +16,7 @@ cd <%= configuration[:common] %>
 sudo -u <%= configuration[:user] %> rake <%= configuration[:application] %>:dump:<%= configuration[:server_only] %>:prod
 sudo -u <%= configuration[:user] %> rake <%= configuration[:application] %>:dump:<%= configuration[:server_only] %>:dev
 sudo -u <%= configuration[:user] %> rake <%= configuration[:application] %>:dump:<%= configuration[:server_only] %>:staging
-<% elsif configuration[:server_only] == "c4c2" %>
+<% elsif configuration[:server_only] == :c4c2 %>
 # pull production db
 cd <%= configuration[:common] %>
 sudo -u deploy cap c4c/prod pull:pulse sensitive=true force=true user=deploy 
