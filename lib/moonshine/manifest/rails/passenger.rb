@@ -2,6 +2,9 @@ module Moonshine::Manifest::Rails::Passenger
   # Install the passenger gem
   def passenger_gem
     configure(:passenger => {})
+    file "/usr/lib/libruby1.8.so",
+      :ensure => "/usr/lib/libruby1.8.so.1.8",
+      :before => package("passenger")
     package "passenger", :ensure => (configuration[:passenger][:version] || :latest), :provider => :gem
   end
 
