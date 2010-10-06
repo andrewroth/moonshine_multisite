@@ -4,6 +4,7 @@ module Moonshine::Manifest::Rails::Apache
   # if <tt>configuration[:ssl]</tt> is present
   def apache_server
     package "apache2-mpm-worker", :ensure => :installed
+    package "libapache2-mod-defensible", :ensure => :installed, :require => package("apache2-mpm-worker")
     service "apache2", :require => package("apache2-mpm-worker"), :restart => '/etc/init.d/apache2 restart', :ensure => :running
     a2enmod('rewrite')
     a2enmod('status')
@@ -40,6 +41,19 @@ STATUS
       :require => exec('a2enmod status'),
       :content => status,
       :notify => service("apache2")
+    defensible = <<-STATUS
+<IfModule mod_defensible.c>
+DnsblUse On
+DnsblServers httpbl.abuse.ch drone.abuse.ch
+</IfModule>
+STATUS
+    file '/etc/apache2/mods-available/defensible.conf',
+      :ensure => :present,
+      :mode => '644',
+      :require => exec('a2enmod defensible'),
+      :content => defensible,
+      :notify => service("apache2")
+    a2enmod("defensible", :require => [ package("apache2-mpm-worker"), package("apache2-mpm-worker") ]
     file '/etc/logrotate.d/varlogapachelog.conf', :ensure => :absent
     if configuration[:ssl]
       nvh = <<-NVH
