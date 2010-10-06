@@ -53,7 +53,7 @@ STATUS
       :require => exec('a2enmod defensible'),
       :content => defensible,
       :notify => service("apache2")
-    a2enmod("defensible", :require => [ package("apache2-mpm-worker"), package("apache2-mpm-worker") ]
+    a2enmod("defensible", :require => [ package("apache2-mpm-worker"), package("apache2-mpm-worker") ])
     file '/etc/logrotate.d/varlogapachelog.conf', :ensure => :absent
     if configuration[:ssl]
       nvh = <<-NVH
