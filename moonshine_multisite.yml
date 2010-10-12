@@ -29,7 +29,6 @@
       :delayed_job: true
       :shared_children:
         - config
-        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -50,17 +49,14 @@
     :stage_moonshines:
       :pulse:
         :prod: 
-          :code: pulse
           :db_name: emu
           :server_name: pulse.campusforchrist.org
           :sensitive: true
           :delayed_job: false # don't conflict with the task already running
         :dev: 
-          :code: moose
           :db_name: emu_dev
           :skip_deploy: true
         :staging: 
-          :code: emu
           :db_name: emu_stage
           :skip_deploy: true
       :intranet:
@@ -96,16 +92,13 @@
       :stage_moonshines:
         :pulse:
           :prod: 
-            :code: pulse
             :db_name: c4c_pulse_prod
             :skip_deploy: true
           :dev:  # only dev is installed in /var/www, the other stages are for db only
                  # since there is only c4c.dev (no c4c.prod or c4c.staging) in pulse git
-            :code: moose
             :db_name: c4c_pulse_dev
             :server_name: pulse.local
           :staging: 
-            :code: emu
             :db_name: c4c_pulse_staging
             :skip_deploy: true
           :test: 
@@ -154,7 +147,6 @@
       :delayed_job: true
       :shared_children:
         - config
-        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -176,11 +168,9 @@
     :stage_moonshines:
       :pulse:
         :prod: 
-          :code: pulse
           :skip_deploy: true
           :skip_pull: true
         :dev: 
-          :code: moose
           :db_name: emu_dev
           :server_name: moose.campusforchrist.org
           :server_aliases:
@@ -188,7 +178,6 @@
           :branch: c4c.dev
           :skip_pull: true
         :staging: 
-          :code: emu
           :db_name: emu_stage
           :server_name: emu.campusforchrist.org
           :server_aliases:
@@ -220,6 +209,54 @@
         :staging:
           :skip_deploy: true
           :skip_pull: true
+    :local:
+      :moonshine:
+        :domain: local
+        :ssl: false
+        :passenger:
+          :rails_env: development
+        :user: <%= %x[whoami].chomp %>
+        :group: <%= %x[whoami].chomp %>
+      :stage_moonshines:
+        :pulse:
+          :prod: 
+            :db_name: c4c_pulse_prod
+            :skip_deploy: true
+          :dev:
+            :db_name: c4c_pulse_dev
+            :skip_deploy: true
+          :staging: 
+            :db_name: c4c_pulse_staging
+            :skip_deploy: true
+          :test: 
+            :db_name: c4c_pulse_test
+            :skip_deploy: true
+        :intranet: # for db only
+          :prod:
+            :db_name: c4c_intranet_prod
+            :skip_deploy: true
+          :dev:
+            :db_name: c4c_intranet_dev
+            :skip_deploy: true
+          :staging:
+            :db_name: c4c_intranet_staging
+            :skip_deploy: true
+          :test:
+            :db_name: c4c_intranet_test
+            :skip_deploy: true
+        :common:
+          :prod:
+            :db_name: c4c_pulse_prod
+            :skip_deploy: true
+          :dev:
+            :db_name: c4c_pulse_dev
+            :skip_deploy: true
+          :staging:
+            :db_name: c4c_pulse_staging
+            :skip_deploy: true
+          :test:
+            :db_name: c4c_pulse_test
+            :skip_deploy: true
   :c4c3:
     :moonshine:
       :user: deploy
@@ -235,7 +272,6 @@
       :delayed_job: true
       :shared_children:
         - config
-        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -312,7 +348,6 @@
       :common: /var/www/common.campusforchrist.org/current
       :shared_children:
         - config
-        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -443,7 +478,6 @@
       :common: /var/www/common.powertochange.org/current
       :shared_children:
         - config
-        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -530,7 +564,6 @@
       :common: /var/www/common.ministryhacks.com/current
       :shared_children:
         - config
-        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -613,7 +646,6 @@
       :common: /var/www/common.ministryhacks.com/current
       :shared_children:
         - config
-        - config/initializers
         - log
         - tmp
         - tmp/sessions
@@ -807,7 +839,6 @@
       :delayed_job: true
       :shared_children:
         - config
-        - config/initializers
         - log
         - tmp
         - tmp/sessions
