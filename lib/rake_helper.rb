@@ -124,10 +124,11 @@ def for_dbs(action)
             multisite_config_hash[:stages].each do |stage|
               utopian = utopian_db_name(server, app, stage)
               legacy = legacy_db_name(server, app, stage)
+              local = local_db_name(server, app, stage)
               master_utopian = utopian_db_name(server, app, @master_stage)
               master_legacy = legacy_db_name(server, app, @master_stage)
               yield :server => server, :app => app, :stage => stage,
-                :utopian => utopian, :legacy => legacy,
+                :utopian => utopian, :legacy => legacy, :local => local,
                 :master_utopian => master_utopian, :master_legacy => master_legacy
             end
           end
