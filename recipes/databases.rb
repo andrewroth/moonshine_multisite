@@ -15,9 +15,10 @@ namespace :pull do
     local_server_only = fetch(:local_server_only, fetch(:server_only))
     local_stage_only = fetch(:local_stage_only, fetch(:stage_only))
     set(:local_utopian, utopian_db_name(local_server_only, fetch(:app), local_stage_only))
+    set(:local_local, local_db_name(local_server_only, fetch(:app), local_stage_only))
     set(:local_legacy, legacy_db_name(local_server_only, fetch(:app), local_stage_only))
     if fetch(:utopian_override, false)
-      set(:local_db, fetch(:local_utopian))
+      set(:local_db, fetch(:local_local) || fetch(:local_utopian))
     else
       set(:local_db, fetch(:local_legacy) || fetch(:local_utopian))
     end
@@ -38,7 +39,7 @@ namespace :pull do
             set_remote_db
             if fetch(:remote_db, nil)
               set_local_db
-              pull_db app, fetch(:server_only), fetch(:stage_only), fetch(:remote_utopian), fetch(:local_db)
+              pull_db app, fetch(:server_only), fetch(:stage_only), fetch(:remote_db), fetch(:local_db)
             else
               puts "[WRN] Couldn't find a database for app #{app} on server #{fetch(:server_only)} stage #{fetch(:stage_only)}"
             end

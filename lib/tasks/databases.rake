@@ -35,7 +35,7 @@ for_dbs(:load) do |p|
   namespace :"#{p[:stage]}" do
     desc "loads tmp/#{p[:utopian]}.sql.gz to #{p[:utopian]} database"
     task :utopian do
-      load_dump("tmp/#{p[:utopian]}.sql", p[:utopian])
+      load_dump("tmp/#{p[:utopian]}.sql", p[:local])
     end
   end
 end
