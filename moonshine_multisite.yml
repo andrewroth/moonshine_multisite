@@ -136,8 +136,8 @@
     :moonshine:
       :user: deploy
       :group: www-data
-      :server: 184.106.199.112
-      :lan_ip: 184.106.199.112
+      :server: 184.106.207.39
+      :lan_ip: 184.106.207.39
       :domain: campusforchrist.org
       :time_zone: PST
       :private_path: /home/deploy/private_repo2
