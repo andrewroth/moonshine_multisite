@@ -171,6 +171,7 @@
           :skip_deploy: true
           :skip_pull: true
         :dev: 
+          :code: moose
           :db_name: emu_dev
           :server_name: moose.campusforchrist.org
           :server_aliases:
@@ -178,6 +179,7 @@
           :branch: c4c.dev
           :skip_pull: true
         :staging: 
+          :dev: emu
           :db_name: emu_stage
           :server_name: emu.campusforchrist.org
           :server_aliases:
