@@ -468,8 +468,8 @@
     :moonshine:
       :user: deploy
       :group: www-data
-      :server: 184.106.199.112
-      :lan_ip: 184.106.230.248 # secondary IP
+      :server: 184.106.207.39
+      :lan_ip: 184.106.207.39 # secondary IP
       :domain: powertochange.org
       :time_zone: PST
       :private_path: /home/deploy/private_repo2
