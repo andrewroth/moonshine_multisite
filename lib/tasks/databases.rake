@@ -103,6 +103,7 @@ multisite_config_hash[:servers].keys.each do |server|
           task :prepare => :environment do
             require 'uri'
             require 'net/http'
+            require 'net/https'
             server = Common::SERVER
             multisite_config_hash[:apps].keys.each do |app|
               puts "Prepare server '#{server}' stage '#{stage}' app '#{app}'"
@@ -127,9 +128,9 @@ def load_structure_from_git(server, stage, app)
     #server_branch = Common::SERVER == "utopian" ? "" : "#{Common::SERVER}."
     server_branch = server == "utopian" ? "" : "#{server}."
     branch = "#{server_branch}#{stage}"
-    url = "http://github.com/#{$1}/#{$2}/raw/#{branch}/db/development_structure.sql"
-    r = Net::HTTP.get_response(URI.parse(url))
-    if r.class == Net::HTTPNotFound
+    url = "https://github.com/#{$1}/#{$2}/raw/#{branch}/db/development_structure.sql"
+    r = Net::HTTPS.get_response(URI.parse(url))
+    if r.class == Net::HTTPNotFound || r.class == Net::HTTPMovedPermanently
       puts "  Abort.  Missing #{url}"
       return false
     else
