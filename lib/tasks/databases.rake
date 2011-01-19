@@ -129,13 +129,21 @@ def load_structure_from_git(server, stage, app)
     server_branch = server == "utopian" ? "" : "#{server}."
     branch = "#{server_branch}#{stage}"
     url = "https://github.com/#{$1}/#{$2}/raw/#{branch}/db/development_structure.sql"
-    r = Net::HTTPS.get_response(URI.parse(url))
-    if r.class == Net::HTTPNotFound || r.class == Net::HTTPMovedPermanently
-      puts "  Abort.  Missing #{url}"
-      return false
-    else
-      puts "  Downloading #{url}"
-    end
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true if uri.scheme == "https"
+    r = nil
+    http.start {
+      r = http.request_get(uri.path) {|res|
+        if res.class == Net::HTTPNotFound || res.class == Net::HTTPMovedPermanently
+          puts "  Abort.  Missing #{url}"
+          return false
+        else
+          puts "  Downloading #{url}"
+        end
+        #puts res.body
+      }
+    }
 
     # at this point r.body has the SQL to execute - need to load it to the right db
     test_config = ActiveRecord::Base.configurations["#{app}_test"]
