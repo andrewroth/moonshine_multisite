@@ -68,7 +68,7 @@
           :db_name: dev_campusforchrist
           :skip_deploy: true
         :staging:
-          :db_name: dev_campusforchrist
+          :db_name: c4c_staging
           :skip_deploy: true
       :common:
         :prod:
@@ -195,7 +195,7 @@
           :skip_deploy: true
           :skip_pull: true
         :staging:
-          :db_name: dev_campusforchrist
+          :db_name: c4c_staging
           :skip_deploy: true
           :skip_pull: true
       :common:
@@ -319,7 +319,7 @@
           :skip_deploy: true
           :skip_pull: true
         :staging:
-          :db_name: dev_campusforchrist
+          :db_name: c4c_staging
           :skip_deploy: true
           :skip_pull: true
       :common:
@@ -403,7 +403,7 @@
           :skip_deploy: true
           :skip_pull: true
         :staging:
-          :db_name: dev_campusforchrist
+          :db_name: c4c_staging
           :skip_deploy: true
           :skip_pull: true
       :common:
@@ -535,7 +535,7 @@
           :db_name: dev_campusforchrist
           :skip_deploy: true
         :staging:
-          :db_name: dev_campusforchrist
+          :db_name: c4c_staging
           :skip_deploy: true
       :common:
         :prod: 
@@ -617,7 +617,7 @@
           :db_name: dev_campusforchrist
           :skip_deploy: true
         :staging:
-          :db_name: dev_campusforchrist
+          :db_name: c4c_staging
           :skip_deploy: true
       :common:
         :prod: 
