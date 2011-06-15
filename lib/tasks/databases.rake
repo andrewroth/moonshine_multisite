@@ -128,7 +128,7 @@ def load_structure_from_git(server, stage, app)
     #server_branch = Common::SERVER == "utopian" ? "" : "#{Common::SERVER}."
     server_branch = server == "utopian" ? "" : "#{server}."
     branch = "#{server_branch}#{stage}"
-    url = "https://github.com/#{$1}/#{$2}/raw/#{branch}/db/development_structure.sql"
+    url = "https://raw.github.com/#{$1}/#{$2}/#{branch}/db/development_structure.sql"
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true if uri.scheme == "https"
