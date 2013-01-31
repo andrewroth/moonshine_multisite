@@ -157,6 +157,7 @@
         - config/session.yml
         - config/mailer.yml
         - config/civicrm.yml
+        - config/koala.yml
         - config/initializers/eventbright.rb
         - log
         - tmp
