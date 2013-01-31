@@ -154,6 +154,7 @@
         - public
       :shared_config:
         - config/database.yml
+        - config/session.yml
         - config/civicrm.yml
         - config/initializers/eventbright.rb
         - log
