@@ -177,7 +177,7 @@
         :dev:
           :code: moose
           :db_name: emu_dev
-          :server_name: moose.campusforchrist.org
+          :server_name: moose.powertochange.com
           :server_aliases:
             - pulse.dev.campusforchrist.org
           :branch: c4c.dev
@@ -185,7 +185,7 @@
         :staging:
           :dev: emu
           :db_name: emu_stage
-          :server_name: emu.campusforchrist.org
+          :server_name: emu.powertochange.com
           :server_aliases:
             - pulse.staging.campusforchrist.org
           :branch: c4c.staging
